@@ -54,7 +54,7 @@ import static org.elasticsearch.common.xcontent.ConstructingObjectParser.constru
  * Example rescorer that multiplies the score of the hit by some factor and doesn't resort them.
  */
 public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorerBuider> {
-    public static final String NAME = "enhanced_search";
+    public static final String NAME = "plugin_parameters";
 
     private final ArrayList<Float> queryFactors; // delete final
     private final ArrayList<String> queryKeywords;
