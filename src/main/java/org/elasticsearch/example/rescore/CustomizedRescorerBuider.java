@@ -191,11 +191,7 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
     }
 
     private static void debugInfo(String key, String value) {
-        System.err.println("===[From Example Rescorer]=== :: " + " *" + key + "* : " + value);
-    }
-
-    private static void debugVoidInfo() {
-        System.err.println("============================================================================");
+        System.err.println("===[From Studio Plugin]=== :: " + " *" + key + "* : " + value);
     }
 
     private static class ExampleRescorer implements Rescorer {
@@ -220,8 +216,8 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
 
                 Document doc = searcher.doc(topDocs.scoreDocs[i].doc);
                 //------------------get DB field array--------
-                Float keywordsScore = editScore(context.queryKeywords, listStringFieldValue(doc, "keywords"));
-                Float embeddingScore = vectorScore(context.queryEmbedding, listFloatFieldValue(doc, "embedding"));
+                Float keywordsScore = editDistance(context.queryKeywords, listStringFieldValue(doc, "keywords"));
+                Float embeddingScore = vectorDistance(context.queryEmbedding, listFloatFieldValue(doc, "embedding"));
 
                 List<MyStruct> factorScore = new ArrayList<MyStruct>() {
                     {
@@ -229,13 +225,13 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
                         add(new MyStruct("embedding Score", embeddingScore));
                     }
                 };
-                debugInfo(">>> doc [ " + i + " ] init score = ", String.valueOf(topDocs.scoreDocs[i].score));
+                debugInfo("--> doc [ " + i + " ] init score = ", String.valueOf(topDocs.scoreDocs[i].score));
                 for (int j = 0; j < factorScore.size(); j++) {
                     System.err.printf("[%-20s] %-7f * %7f [factor]\n", factorScore.get(j).name, factorScore.get(j).value, context.queryFactors.get(j));
                     topDocs.scoreDocs[i].score += factorScore.get(j).value * context.queryFactors.get(j);
                 }
 
-                debugInfo("<<< doc [ " + i + " ] NEW score = ", String.valueOf(topDocs.scoreDocs[i].score));
+                debugInfo("^^^ doc [ " + i + " ] NEW score = ", String.valueOf(topDocs.scoreDocs[i].score));
             }
 
             // Sort by score descending, then docID ascending, just like lucene's QueryRescorer
@@ -272,7 +268,9 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
             // Since we don't use queries there are no terms to extract.
         }
 
-        public Float editScore(List<String> word1, List<String> word2) {
+        public Float editDistance(List<String> word1, List<String> word2) {
+            System.err.println("word1: "+word1);
+            System.err.println("word2: "+word2);
             if (word1.size() == 0 || word2.size() == 0) {
                 return 0.0F;
             }
@@ -318,9 +316,11 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
             return Arrays.stream(values).map(Float::parseFloat).collect(Collectors.toList());
         }
 
-        public Float vectorScore(List<Float> queryVec, List<Float> docVec) {
+        public Float vectorDistance(List<Float> queryVec, List<Float> docVec) {
+            System.err.println("queryVec: "+queryVec);
+            System.err.println("docVec: "+docVec);
             if ((queryVec == null) || (docVec == null) || (queryVec.size() != docVec.size())) {
-                return -1.0F;
+                return 0.0F;
             }
             double queryVecNorm = 0.0F;
             double docVecNorm = 0.0F;
