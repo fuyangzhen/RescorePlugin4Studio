@@ -115,7 +115,7 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
 
     private static final ParseField QUERY_FACTORS = new ParseField("queryFactors");
     private static final ParseField QUERY_KEYWORDS = new ParseField("queryKeywords");
-    private static final ParseField QUERY_EMBEDDING = new ParseField("queryEmbedding");
+    private static final ParseField QUERY_EMBEDDING = new ParseField("queryEmbedding222");
 
 
     @Override
@@ -227,7 +227,7 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
                 };
                 debugInfo("--> doc [ " + i + " ] init score = ", String.valueOf(topDocs.scoreDocs[i].score));
                 for (int j = 0; j < factorScore.size(); j++) {
-                    System.err.printf("[%-20s] %-7f * %7f [factor]\n", factorScore.get(j).name, factorScore.get(j).value, context.queryFactors.get(j));
+                    System.err.printf("[%20s] %-7f * %7f [factor]\n", factorScore.get(j).name, factorScore.get(j).value, context.queryFactors.get(j));
                     topDocs.scoreDocs[i].score += factorScore.get(j).value * context.queryFactors.get(j);
                 }
 

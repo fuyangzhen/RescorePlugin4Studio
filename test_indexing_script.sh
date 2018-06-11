@@ -14,10 +14,12 @@ curl -X PUT "$IP/$IndexName" -H 'Content-Type: application/json' -d'
           "type": "text"
         },
         "keywords": {
-          "type": "keyword"
+          "type": "keyword",
+		  "store": true
         },
         "embedding": {
-          "type": "float"
+          "type": "float",
+		  "store": true
         }
       }
     }
