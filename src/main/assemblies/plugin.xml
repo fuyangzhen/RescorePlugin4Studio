@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <assembly>
-    <id>RescorePlugin</id>
+    <id>RescorePlugin4Studio</id>
     <formats>
         <format>zip</format>
     </formats>
@@ -15,13 +15,13 @@
     <files>
         <file>
             <source>${project.basedir}/src/main/resources/plugin-descriptor.properties</source>
-            <outputDirectory>RescorePlugin</outputDirectory>
+            <outputDirectory>RescorePlugin4Studio</outputDirectory>
             <filtered>true</filtered>
         </file>
     </files>
     <dependencySets>
         <dependencySet>
-            <outputDirectory>RescorePlugin</outputDirectory>
+            <outputDirectory>RescorePlugin4Studio</outputDirectory>
             <useProjectArtifact>true</useProjectArtifact>
             <useTransitiveFiltering>true</useTransitiveFiltering>
             <excludes>

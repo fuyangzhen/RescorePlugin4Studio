@@ -2,20 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <name>RescorePlugin</name>
+    <name>RescorePlugin4Studio</name>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.elasticsearch</groupId>
-    <artifactId>RescorePlugin</artifactId>
+    <artifactId>RescorePlugin4Studio</artifactId>
     <version>${elasticsearch.version}</version>
     <packaging>jar</packaging>
-    <description>RescorePlugin</description>
+    <description>RescorePlugin4Studio</description>
     <inceptionYear>2011</inceptionYear>
 
     <properties>
         <elasticsearch.version>6.2.4</elasticsearch.version>
         <maven.compiler.target>1.8</maven.compiler.target>
         <elasticsearch.assembly.descriptor>${project.basedir}/src/main/assemblies/plugin.xml</elasticsearch.assembly.descriptor>
-        <elasticsearch.plugin.name>RescorePlugin</elasticsearch.plugin.name>
+        <elasticsearch.plugin.name>RescorePlugin4Studio</elasticsearch.plugin.name>
         <elasticsearch.plugin.classname>org.elasticsearch.example.rescore.CustomizedRescorePlugin</elasticsearch.plugin.classname>
         <elasticsearch.plugin.jvm>true</elasticsearch.plugin.jvm>
         <tests.rest.load_packaged>false</tests.rest.load_packaged>
