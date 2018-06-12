@@ -306,9 +306,9 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
         }
 
         public List<String> listStringFieldValue(Document doc, String field) {
-            String[] values = doc.getValues(field);
-            System.err.println("**** string value: " + values.toString());
-            List<String> stringList = Arrays.asList(values[0].split(","));
+            String values = doc.get(field);
+            System.err.println("**** string value: "+values);
+            List<String> stringList = Arrays.asList(values.split(","));
             //List stringList = Arrays.asList(values);
             return stringList;
         }
