@@ -269,8 +269,8 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
         }
 
         public Float editDistance(List<String> word1, List<String> word2) {
-            System.err.println("word1: "+word1);
-            System.err.println("word2: "+word2);
+//            System.err.println("word1: "+word1);
+//            System.err.println("word2: "+word2);
             if (word1.size() == 0 || word2.size() == 0) {
                 return 0.0F;
             }
@@ -317,8 +317,8 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
         }
 
         public Float vectorDistance(List<Float> queryVec, List<Float> docVec) {
-            System.err.println("queryVec: "+queryVec);
-            System.err.println("docVec: "+docVec);
+//            System.err.println("queryVec: "+queryVec);
+//            System.err.println("docVec: "+docVec);
             if ((queryVec == null) || (docVec == null) || (queryVec.size() != docVec.size())) {
                 return 0.0F;
             }
