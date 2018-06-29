@@ -5,14 +5,17 @@ IP=52.191.253.236:9200
 curl -X PUT "$IP/$IndexName" -H 'Content-Type: application/json' -d'
 {
   "mappings": {
-    "_doc": {
+    "qna": {
       "properties": {
-        "q": {
+        "question": {
           "type": "text"
         },
-        "a": {
+        "answer": {
           "type": "text"
         },
+		"labeledQuestion":{
+		  "type": "text"
+		},
         "keywords": {
           "type": "text",
 		  "store": true
@@ -27,16 +30,17 @@ curl -X PUT "$IP/$IndexName" -H 'Content-Type: application/json' -d'
 }
 '
 # check mappings
-curl -X GET "$IP/$IndexName/_mapping/_doc" -H 'Content-Type: application/json' -d'
+curl -X GET "$IP/$IndexName/_mapping/qna" -H 'Content-Type: application/json' -d'
 {
 }
 '
 
 # index some test samples
-curl -X POST "$IP/$IndexName/_doc" -H 'Content-Type: application/json' -d'
+curl -X POST "$IP/$IndexName/qna" -H 'Content-Type: application/json' -d'
 {
-  "q": "Office 2013在哪下载？",
-  "a": "您可以通过office入口进行下载安装office。",
+  "question": "Office 2013在哪下载？",
+  "answer": "您可以通过office入口进行下载安装office。",
+  "labeledQuestion":"<kw>Office 2013</kw>在哪<kw>下载</kw>？",
   "keywords": [
     "office",
 	"2013"
@@ -48,10 +52,11 @@ curl -X POST "$IP/$IndexName/_doc" -H 'Content-Type: application/json' -d'
   ]
 }
 '
-curl -X POST "$IP/$IndexName/_doc" -H 'Content-Type: application/json' -d'
+curl -X POST "$IP/$IndexName/qna" -H 'Content-Type: application/json' -d'
 {
-  "q": "mac的excel怎么登陆",
-  "a": "您可以通过左上角账户入口进行登录",
+  "question": "mac的excel怎么登陆",
+  "answer": "您可以通过左上角账户入口进行登录",
+  "labeledQuestion": "<kw>mac</kw>的<kw>excel</kw>怎么登陆",
   "keywords": [
   ],
   "embedding": [
@@ -61,10 +66,11 @@ curl -X POST "$IP/$IndexName/_doc" -H 'Content-Type: application/json' -d'
   ]
 }
 '
-curl -X POST "$IP/$IndexName/_doc" -H 'Content-Type: application/json' -d'
+curl -X POST "$IP/$IndexName/qna" -H 'Content-Type: application/json' -d'
 {
-  "q": "pdf文字怎么粘贴进word",
-  "a": "您可以通过pdf阅读软件选取字体复制，然后粘贴进word",
+  "question": "pdf文字怎么粘贴进word",
+  "answer": "您可以通过pdf阅读软件选取字体复制，然后粘贴进word",
+  "labeledQuestion": "<kw>pdf</kw>文字怎么粘贴进<kw>word</kw>",
   "keywords": [
     "pdf",
 	"word",
@@ -80,7 +86,7 @@ curl -X POST "$IP/$IndexName/_search" -H 'Content-Type: application/json' -d'
 {
   "query": {
     "match": {
-      "q": "office怎么下载"
+      "question": "office怎么下载"
     }
   },
   "rescore": {
