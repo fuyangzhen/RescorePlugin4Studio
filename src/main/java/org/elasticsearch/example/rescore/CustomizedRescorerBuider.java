@@ -308,12 +308,12 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
         public List<String> listStringFieldValue(Document doc, String field) {
             String values;
             if (doc.getField(field) == null) {
-                values = "";
+                values = null;
             } else {
-                values = doc.getField(field).stringValue();
+                values = doc.getFields(field).toString();
             }
             System.err.println("**** string value: " + values);
-            List<String> stringList = Arrays.asList(values.split(","));
+            List<String> stringList = Arrays.asList(values);
             //List stringList = Arrays.asList(values);
             return stringList;
         }
