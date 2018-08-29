@@ -21,6 +21,7 @@ package org.elasticsearch.example.rescore;
 
 import org.apache.lucene.document.Document;
 
+import org.apache.lucene.index.IndexableField;
 import org.apache.lucene.index.Term;
 
 import org.apache.lucene.search.Explanation;
@@ -306,16 +307,10 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
         }
 
         public List<String> listStringFieldValue(Document doc, String field) {
-            String values;
-            if (doc.getField(field) == null) {
-                values = null;
-            } else {
-                values = doc.getFields(field).toString();
-            }
-            System.err.println("**** string value: " + values);
-            List<String> stringList = Arrays.asList(values);
-            //List stringList = Arrays.asList(values);
-            return stringList;
+            IndexableField[] fields = doc.getFields(field);
+            List<String> res = Arrays.stream(fields).map(Object::toString).collect(Collectors.toList());
+            System.err.println("**** string value: " + res);
+            return res;
         }
 
         public List<Float> listFloatFieldValue(Document doc, String field) {
