@@ -270,8 +270,8 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
         }
 
         public Float editDistance(List<String> word1, List<String> word2) {
-//            System.err.println("word1: "+word1);
-//            System.err.println("word2: "+word2);
+            System.err.println("word1: "+word1);
+            System.err.println("word2: "+word2);
             if (word1.size() == 0 || word2.size() == 0) {
                 return 0.0F;
             }
@@ -309,7 +309,7 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
         public List<String> listStringFieldValue(Document doc, String field) {
             IndexableField[] fields = doc.getFields(field);
             List<String> res = Arrays.stream(fields).map(Object::toString).collect(Collectors.toList());
-            System.err.println("**** string value[] -> " + res);
+//            System.err.println("**** string value[] -> " + res);
             return res;
         }
 
