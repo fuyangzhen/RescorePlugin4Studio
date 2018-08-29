@@ -308,7 +308,11 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
 
         public List<String> listStringFieldValue(Document doc, String field) {
             IndexableField[] fields = doc.getFields(field);
-            List<String> res = Arrays.stream(fields).map(Object::toString).collect(Collectors.toList());
+            List<String> res = new ArrayList<>();
+            for(int i=0;i<fields.length;i++){
+                String value = fields[i].stringValue();
+                res.add(value);
+            }
 //            System.err.println("**** string value[] -> " + res);
             return res;
         }
