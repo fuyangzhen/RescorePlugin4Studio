@@ -270,8 +270,8 @@ public class CustomizedRescorerBuider extends RescorerBuilder<CustomizedRescorer
         }
 
         public Float editDistance(List<String> word1, List<String> word2) {
-            System.err.println("word1: "+word1);
-            System.err.println("word2: "+word2);
+            System.err.println("::: query KW: "+word1);
+            System.err.println("::: doc   KW: "+word2);
             if (word1.size() == 0 || word2.size() == 0) {
                 return 0.0F;
             }
